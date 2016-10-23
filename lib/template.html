@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title></title>
+        <link rel="stylesheet" href="https://ionicabizau.github.io/github-calendar/dist/github-calendar.css" type="text/css" media="screen" charset="utf-8">
+        <style>
+            <% theme.levels.forEach(function (c, i) { %>
+                rect[data-level='<%= i %>'] { fill: <%= c %> }
+            <% }) %>
+            rect[data-level='-1'] { display: none; }
+        </style>
+    </head>
+    <body>
+        <div class="calendar">
+            <div class="mb-5 border border-gray-dark rounded-1 py-3">
+                <div class="js-calendar-graph is-graph-loading graph-canvas calendar-graph height-full">
+                    <svg width="676" height="104" class="js-calendar-graph-svg">
+                        <g transform="translate(16, 20)">
+                            <% var DAY_X = 13; %>
+                            <% var WEEK_X = 0; %>
+                            <% var DAY_Y = 0; %>
+                            <% levels.forEach(function (cWeek) { %>
+                                <g transform="translate(<%= WEEK_X %>, 0)">
+                                <% cWeek.forEach(function (cDayLevel) { %>
+                                    <rect class="day" width="10" height="10" x="<%= DAY_X %>" y="<%= DAY_Y %>" data-level="<%= cDayLevel %>"></rect>
+                                <% DAY_Y += 12; %>
+                                <% }) %>
+                                <% DAY_Y = 0; %>
+                                <% --DAY_X %>
+                                <% WEEK_X  += 13%>
+                                </g>
+                            <% }) %>
+                            <!--
+                            <text x="37" y="-10" class="month">Nov</text>
+                            <text x="97" y="-10" class="month">Dec</text>
+                            <text x="145" y="-10" class="month">Jan</text>
+                            <text x="205" y="-10" class="month">Feb</text>
+                            <text x="253" y="-10" class="month">Mar</text>
+                            <text x="301" y="-10" class="month">Apr</text>
+                            <text x="349" y="-10" class="month">May</text>
+                            <text x="409" y="-10" class="month">Jun</text>
+                            <text x="457" y="-10" class="month">Jul</text>
+                            <text x="517" y="-10" class="month">Aug</text>
+                            <text x="565" y="-10" class="month">Sep</text>
+                            <text x="613" y="-10" class="month">Oct</text> -->
+                            <text text-anchor="start" class="wday" dx="-14" dy="8" style="display: none;">Sun</text>
+                            <text text-anchor="start" class="wday" dx="-14" dy="20">Mon</text>
+                            <text text-anchor="start" class="wday" dx="-14" dy="32" style="display: none;">Tue</text>
+                            <text text-anchor="start" class="wday" dx="-14" dy="44">Wed</text>
+                            <text text-anchor="start" class="wday" dx="-14" dy="57" style="display: none;">Thu</text>
+                            <text text-anchor="start" class="wday" dx="-14" dy="69">Fri</text>
+                            <text text-anchor="start" class="wday" dx="-14" dy="81" style="display: none;">Sat</text>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="contrib-footer clearfix mt-1 mx-3 px-3 pb-1">
+                    <div class="contrib-legend text-gray" title="A summary of pull requests, issues opened, and commits to the default and gh-pages branches.">
+                        Less
+                        <ul class="legend">
+                            <% theme.levels.forEach(function (c, i) { %>
+                                <li style="background-color: <%= c %>"></li>
+                            <% }) %>
+                        </ul>
+                        More
+                    </div>
+                </div>
+
+            </div>
+            <div class="contrib-column contrib-column-first table-column"><span class="text-muted">Contributions in the last year</span>
+                <span class="contrib-number"><%= total %> total</span>
+                <!-- <span class="text-muted">Oct 23, 2015 – Oct 23, 2016</span> -->
+                <span class="text-muted">&nbsp;</span>
+            </div>
+            <div class="contrib-column table-column"><span class="text-muted">Longest streak</span>
+                <span class="contrib-number"><%= lStreak %> days</span>
+                <!--<span class="text-muted">October 18 – January 20</span> -->
+            </div>
+            <div class="contrib-column table-column"><span class="text-muted">Current streak</span>
+                <span class="contrib-number"><%= cStreak %> days</span>
+                <!-- <span class="text-muted">September 25 – October 23</span> -->
+            </div>
+        </div>
+    </body>
+</html>

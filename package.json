@@ -1,4 +1,7 @@
 {
+  "bin": {
+    "git-stats-html": "bin/git-stats-html"
+  },
   "name": "git-stats-html",
   "description": "Turn git-stats result into HTML output.",
   "keywords": [
@@ -37,5 +40,11 @@
   "bugs": {
     "url": "https://github.com/IonicaBizau/git-stats-html/issues"
   },
-  "homepage": "https://github.com/IonicaBizau/git-stats-html#readme"
+  "homepage": "https://github.com/IonicaBizau/git-stats-html#readme",
+  "dependencies": {
+    "ajs": "^1.2.3",
+    "git-stats-colors": "^2.3.6",
+    "github-calendar-legend": "^1.0.5",
+    "tilda": "^4.4.2"
+  }
 }

@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+"use strict";
+
+const Tilda = require("tilda")
+    , gitStatsHtml = require("..")
+    ;
+
+new Tilda(`${__dirname}/../package.json`, {
+    args: [
+        {
+            name: "data"
+          , desc: "The input JSON data."
+          , type: Object
+          , stdin: true
+        }
+    ]
+}).main(action => {
+    gitStatsHtml(action.args.data, (err, result) => {
+        console.log(err || result);
+    });
+});
