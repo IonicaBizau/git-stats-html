@@ -43,8 +43,10 @@
   "homepage": "https://github.com/IonicaBizau/git-stats-html#readme",
   "dependencies": {
     "ajs": "^1.2.3",
+    "daty": "^1.0.7",
     "git-stats-colors": "^2.3.6",
     "github-calendar-legend": "^1.0.5",
+    "map-o": "^2.0.5",
     "tilda": "^4.4.2"
   }
 }

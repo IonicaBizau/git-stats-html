@@ -23,7 +23,7 @@
                             <% levels.forEach(function (cWeek) { %>
                                 <g transform="translate(<%= WEEK_X %>, 0)">
                                 <% cWeek.forEach(function (cDayLevel) { %>
-                                    <rect class="day" width="10" height="10" x="<%= DAY_X %>" y="<%= DAY_Y %>" data-level="<%= cDayLevel %>"></rect>
+                                    <rect class="day" width="10" height="10" x="<%= DAY_X %>" y="<%= DAY_Y %>" data-level="<%= cDayLevel.level %>"></rect>
                                 <% DAY_Y += 12; %>
                                 <% }) %>
                                 <% DAY_Y = 0; %>
@@ -31,19 +31,9 @@
                                 <% WEEK_X  += 13%>
                                 </g>
                             <% }) %>
-                            <!--
-                            <text x="37" y="-10" class="month">Nov</text>
-                            <text x="97" y="-10" class="month">Dec</text>
-                            <text x="145" y="-10" class="month">Jan</text>
-                            <text x="205" y="-10" class="month">Feb</text>
-                            <text x="253" y="-10" class="month">Mar</text>
-                            <text x="301" y="-10" class="month">Apr</text>
-                            <text x="349" y="-10" class="month">May</text>
-                            <text x="409" y="-10" class="month">Jun</text>
-                            <text x="457" y="-10" class="month">Jul</text>
-                            <text x="517" y="-10" class="month">Aug</text>
-                            <text x="565" y="-10" class="month">Sep</text>
-                            <text x="613" y="-10" class="month">Oct</text> -->
+                            <% months.forEach(function (month) { %>
+                                <text x="<%= month.left %>" y="-10" class="month"><%= month.name %></text>
+                            <% }) %>
                             <text text-anchor="start" class="wday" dx="-14" dy="8" style="display: none;">Sun</text>
                             <text text-anchor="start" class="wday" dx="-14" dy="20">Mon</text>
                             <text text-anchor="start" class="wday" dx="-14" dy="32" style="display: none;">Tue</text>
@@ -70,16 +60,21 @@
             </div>
             <div class="contrib-column contrib-column-first table-column"><span class="text-muted">Contributions in the last year</span>
                 <span class="contrib-number"><%= total %> total</span>
-                <!-- <span class="text-muted">Oct 23, 2015 – Oct 23, 2016</span> -->
-                <span class="text-muted">&nbsp;</span>
+                <span class="text-muted"><%= start.format("LL") %> – <%= end.format("LL") %></span>
             </div>
             <div class="contrib-column table-column"><span class="text-muted">Longest streak</span>
                 <span class="contrib-number"><%= lStreak %> days</span>
-                <!--<span class="text-muted">October 18 – January 20</span> -->
+                <% if (lStreak !== 0) { %>
+                    <%= longestStreak.start.format("LL") %> – <%= longestStreak.end.format("LL") %>
+                <% } %>
             </div>
             <div class="contrib-column table-column"><span class="text-muted">Current streak</span>
                 <span class="contrib-number"><%= cStreak %> days</span>
-                <!-- <span class="text-muted">September 25 – October 23</span> -->
+                <span class="text-muted">
+                    <% if (cStreak !== 0) { %>
+                        <%= currentStreak.start.format("LL") %> – <%= currentStreak.end.format("LL") %>
+                    <% } %>
+                </span>
             </div>
         </div>
     </body>

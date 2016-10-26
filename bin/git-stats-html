@@ -3,6 +3,7 @@
 
 const Tilda = require("tilda")
     , gitStatsHtml = require("..")
+    , fs = require("fs")
     ;
 
 new Tilda(`${__dirname}/../package.json`, {
@@ -13,9 +14,27 @@ new Tilda(`${__dirname}/../package.json`, {
           , type: Object
           , stdin: true
         }
+    ],
+    options: [
+        {
+            name: "path"
+          , desc: "The output file path. Default it will display the HTML in the stdout."
+          , type: String
+          , opts: ["o", "output"]
+        }
     ]
 }).main(action => {
     gitStatsHtml(action.args.data, (err, result) => {
-        console.log(err || result);
+
+        if (err) {
+            return console.error(err);
+        }
+
+        let output = action.options.output.value;
+        if (output) {
+            fs.writeFileSync(output, result);
+        } else {
+            console.log(err || result);
+        }
     });
 });
