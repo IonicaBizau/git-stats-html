@@ -22,6 +22,14 @@ new Tilda(`${__dirname}/../package.json`, {
           , type: String
           , opts: ["o", "output"]
         }
+      , {
+            desc: "Use this option for bigger than one year calendars."
+          , opts: ["big"]
+        }
+    ],
+    examples: [
+        "git-stats --raw | git-stats-html -o out.html"
+      , "git-stats --since '1 January 2015' --raw | ./bin/git-stats-html -o out.html --big"
     ]
 }).main(action => {
     gitStatsHtml(action.args.data, (err, result) => {
