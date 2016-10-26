@@ -5,6 +5,10 @@
 
 > Turn git-stats result into HTML output.
 
+Check out [`git-stats`](https://github.com/IonicaBizau/git-stats) for more details about git-stats.
+
+[![git-stats-html](http://i.imgur.com/hnSUlCx.png)](#)
+
 ## :cloud: Installation
 
 You can install the package globally and use it as command line tool:
@@ -28,27 +32,17 @@ Command arguments:
   <data>  The input JSON data.
 
 Options:
-  -v, --version  Displays version information.
-  -h, --help     Displays this help.
+  -o, --output <path>  The output file path. Default it will display the
+                       HTML in the stdout.
+  --big                Use this option for bigger than one year calendars.
+  -v, --version        Displays version information.
+  -h, --help           Displays this help.
+
+Examples:
+  $ git-stats --raw | git-stats-html -o out.html
+  $ git-stats --since '1 January 2015' --raw | ./bin/git-stats-html -o out.html --big
 
 Documentation can be found at https://github.com/IonicaBizau/git-stats-html#readme.
-```
-
-## :clipboard: Example
-
-
-Here is an example how to use this package as library. To install it locally, as library, you can do that using `npm`:
-
-```sh
-$ npm i --save git-stats-html
-```
-
-
-
-```js
-const gitStatsHtml = require("git-stats-html");
-
-console.log(gitStatsHtml());
 ```
 
 ## :memo: Documentation
