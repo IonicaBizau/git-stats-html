@@ -48,5 +48,9 @@
     "github-calendar-legend": "^1.0.5",
     "map-o": "^2.0.5",
     "tilda": "^4.4.2"
+  },
+  "blah": {
+    "ex_img": "http://i.imgur.com/hnSUlCx.png",
+    "description": "Check out [`git-stats`](https://github.com/IonicaBizau/git-stats) for more details about git-stats."
   }
 }
