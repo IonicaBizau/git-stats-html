@@ -17,7 +17,11 @@ You can install the package globally and use it as command line tool:
 
 
 ```sh
-$ npm i -g git-stats-html
+# Using npm
+npm install --global git-stats-html
+
+# Using yarn
+yarn global add git-stats-html
 ```
 
 
