@@ -1,48 +1,36 @@
 #!/usr/bin/env node
 "use strict";
 
-const Tilda = require("tilda")
-    , gitStatsHtml = require("..")
-    , fs = require("fs")
-    ;
+const fs = require("fs");
+const gitStatsHtml = require("..");
+const parseArgs = require("minimist");
 
-new Tilda(`${__dirname}/../package.json`, {
-    args: [
-        {
-            name: "data"
-          , desc: "The input JSON data."
-          , type: Object
-          , stdin: true
-        }
-    ],
-    options: [
-        {
-            name: "path"
-          , desc: "The output file path. Default it will display the HTML in the stdout."
-          , type: String
-          , opts: ["o", "output"]
-        }
-      , {
-            desc: "Use this option for bigger than one year calendars."
-          , opts: ["big"]
-        }
-    ],
-    examples: [
-        "git-stats --raw | git-stats-html -o out.html"
-      , "git-stats --since '1 January 2015' --raw | ./bin/git-stats-html -o out.html --big"
-    ]
-}).main(action => {
-    gitStatsHtml(action.args.data, (err, result) => {
+const main = () => {
+  const argv = parseArgs(process.argv.slice(2), {
+    string: "path",
+    boolean: "big"
+  });
 
-        if (err) {
-            return console.error(err);
-        }
+  process.stdin.resume();
+  process.stdin.setEncoding("utf8");
 
-        let output = action.options.output.value;
-        if (output) {
-            fs.writeFileSync(output, result);
-        } else {
-            console.log(err || result);
-        }
+  let pipeInput = "";
+
+  process.stdin.on("data", function(chunk) {
+    pipeInput += chunk;
+  });
+
+  process.stdin.on("end", function() {
+    gitStatsHtml(JSON.parse(pipeInput), (err, result) => {
+      if (err) {
+        return console.error(err);
+      }
+
+      const filename = argv.o || "git-stats.html";
+
+      fs.writeFileSync(filename, result);
     });
-});
+  });
+};
+
+main();

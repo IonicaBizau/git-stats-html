@@ -49,7 +49,7 @@
     "git-stats-colors": "^2.3.6",
     "github-calendar-legend": "^1.0.5",
     "map-o": "^2.0.5",
-    "tilda": "^4.4.2"
+    "minimist": "^1.2.0"
   },
   "blah": {
     "ex_img": "http://i.imgur.com/hnSUlCx.png",
